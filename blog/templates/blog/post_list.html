@@ -1,6 +1,6 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Girassol|Noticia+Text|Permanent+Marker|Righteous&display=swap" rel="stylesheet">
-  
+
   <meta charset="UTF-8">
 
   <style>
@@ -115,5 +115,12 @@
               dancing (so he can take a break). The last button changes the background color. Repeatedly pressing it creates a
               strobe effect! Click to try it out!</p>
           </div>
+          {% for post in posts %}
+              <div>
+                  <p>published: {{ post.published_date }}</p>
+                  <h2><a href="">{{ post.title }}</a></h2>
+                  <p>{{ post.text|linebreaksbr }}</p>
+              </div>
+          {% endfor %}
     </body>
 </html>
