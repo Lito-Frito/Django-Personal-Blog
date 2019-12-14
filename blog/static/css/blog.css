@@ -67,6 +67,11 @@ p {
     font-family: 'Lobster';
 }
 
+.btn-default, .btn-default:hover, .btn-default:visited {
+  float: right;
+  display: inline;
+}
+
 .project_link {
   font-family: 'Fugaz One', cursive;
   font-size: 20px;

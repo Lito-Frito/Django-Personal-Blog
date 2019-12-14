@@ -8,6 +8,10 @@
 
           <!--from blog/urls.py, this file takes the URL for post detail. It then makes the blog post title a hyperlink to that content (line below)-->
           <!-- pk=primary key, a unique name for each record in a database: post.pk pulls that number and sets it equal to the var pk-->
+          <!-- If user is authenticated, show the Edit button (pencil) -->
+          {% if user.is_authenticated %}
+               <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+          {% endif %}
           <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <div class="date">
                 {{ post.published_date }}

@@ -12,7 +12,8 @@ urlpatterns = [
         #ex: post/5/ would tell Django to get the 5th blog post and display it as a page (using the View you created)
     path('post/<int:pk>/', views.post_detail, name='post_detail'),
 
-    #Let's you create a new post
+    #Path to create a new post by htting the glyphicon-plus span (button)
     path('post/new/', views.post_new, name='post_new'),
+    #Path to edit a post
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
 ]

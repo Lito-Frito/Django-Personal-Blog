@@ -1,9 +1,11 @@
 {% extends 'blog/base.html' %}
-
-{% block content %}
-    <h2>New post</h2>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-{% endblock %}
+<!-- Creates a form: User can create a new post by clicking a cross-button and the click Save to submit -->
+  {% block content %}
+      <h2>New post</h2>
+      <!-- POST has nothing to do with a blog post. It means you're 'posting' data. I.e. .POST means the input from the user -->
+      <form method="POST" class="post-form">{% csrf_token %}
+          <!-- this is how you generate a form in Django -->
+          {{ form.as_p }}
+          <button type="submit" class="save btn btn-default">Save</button>
+      </form>
+  {% endblock %}
