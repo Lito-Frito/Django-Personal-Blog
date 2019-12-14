@@ -2,10 +2,11 @@
 <html>
 <!--blog/views.py seaches for this file and passes it along as the default page of the blog-->
     <head>
-        <title>Django Girls blog</title>
+        <title>Lito's Blog</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Girassol|Noticia+Text|Permanent+Marker|Righteous&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
@@ -13,11 +14,13 @@
           {% if user.is_authenticated %}
               <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
           {% endif %}
-            <h1><a href="/">Django Girls Blog</a></h1>
+            <h1><a href="/">Lito's Blog</a></h1>
+            <h4>"People. Purpose. Pupusas"</h4>
         </div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
+                    <!-- This is the part Django fills in with the post_list file -->
                     {% block content %}
                     {% endblock %}
                 </div>

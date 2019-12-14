@@ -1,9 +1,20 @@
-h1 a, h2 a {
-    color: #C25100;
-    font-family: 'Lobster';
-}
 body {
     padding-left: 15px;
+}
+
+h1 a {
+    font-family: 'Righteous', cursive;
+}
+
+h2 {
+    font-family: 'Lobster', cursive;
+    color: black;
+}
+
+p {
+  font-family: 'Noticia Text', serif;
+  text-align: justify;
+  line-height: 24px;
 }
 
 .page-header {
@@ -14,16 +25,18 @@ body {
 
 .page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
     color: #ffffff;
-    font-size: 36pt;
+    font-size: 40pt;
     text-decoration: none;
+}
+
+.page-header h4 {
+  color: #ffffff;
+  font-size: 25px;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .content {
     margin-left: 40px;
-}
-
-h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
 }
 
 .date {
@@ -51,4 +64,10 @@ h1, h2, h3, h4 {
 
 .post h2 a, .post h2 a:visited {
     color: #000000;
+    font-family: 'Lobster';
+}
+
+.project_link {
+  font-family: 'Fugaz One', cursive;
+  font-size: 20px;
 }
