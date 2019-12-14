@@ -1,8 +1,13 @@
 {% extends 'blog/base.html' %}
 
+<!--This block is passed along to base.html (as seen in first line). -->
+<!--It fills in the block on that file with this loop statement.  'Content' is the name of this block -->
 {% block content %}
     {% for post in posts %}
         <div class="post">
+
+          <!--from blog/urls.py, this file takes the URL for post detail. It then makes the blog post title a hyperlink to that content (line below)-->
+          <!-- pk=primary key, a unique name for each record in a database: post.pk pulls that number and sets it equal to the var pk-->
           <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
             <div class="date">
                 {{ post.published_date }}

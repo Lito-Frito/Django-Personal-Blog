@@ -1,5 +1,6 @@
 {% load static %}
 <html>
+<!--blog/views.py seaches for this file and passes it along as the default page of the blog-->
     <head>
         <title>Django Girls blog</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -9,13 +10,16 @@
     </head>
     <body>
         <div class="page-header">
+          {% if user.is_authenticated %}
+              <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+          {% endif %}
             <h1><a href="/">Django Girls Blog</a></h1>
         </div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
