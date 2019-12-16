@@ -18,6 +18,22 @@ p {
   line-height: 24px;
 }
 
+small {
+  font-family: 'Noticia Text', serif;
+  color: #ffffff;
+  text-align: center;
+  float: right;
+}
+
+i {
+  float: right;
+  position: absolute;
+}
+
+.page-header a, .page-header a:visited, .page-header a:active {
+  color: white
+}
+
 .page-header {
     background-color: #6a2811;
     margin-top: 0;
@@ -57,6 +73,7 @@ p {
     float: right;
     font-size: 26pt;
     margin-right: 20px;
+    margin-bottom: 5px;
 }
 
 .post {

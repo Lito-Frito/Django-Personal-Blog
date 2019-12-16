@@ -120,3 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#If login is correct, redirect to homepage of blog (pythonanywhere.com/)
+LOGIN_REDIRECT_URL = '/'

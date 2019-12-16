@@ -13,6 +13,9 @@ from django.shortcuts import render, get_object_or_404
 #imports PostForm (which has .ModelForm)
 from .forms import PostForm
 
+#decorator used to see if someone is logged in; @login_required will make pages only accessible by logged in users
+from django.contrib.auth.decorators import login_required
+
 #This function (view) tells URLS.PY what post_list is (in that file, it's the default page for the blog) and renders it.
 #See blog/template/blog/post_detail.html to see the file that's being rendered
 def post_list(request):
@@ -30,6 +33,7 @@ def post_detail(request, pk):
 
 
 #POST/.POST means you posted data, not a blog post
+@login_required
 def post_new(request):
     #This means, "if you have already submited (or POSTed) data, save the content and call post_detail to create a new blog post"
     #Finally, go back to the post_new page, but after submiting the data
@@ -55,6 +59,7 @@ def post_new(request):
 
 
 #Let's  user edit posts, only if authenticated and valid data is passed through in the text form
+@login_required
 def post_edit(request, pk):
     #if page doesn't exist, return 404; take parameters Post and pk
     post = get_object_or_404(Post, pk=pk)
@@ -72,6 +77,7 @@ def post_edit(request, pk):
 
 
 #view to display only draft posts
+@login_required
 def post_draft_list(request):
     #using a QuerySet, filters for posts without a publish date (i.e drafts) and orders them by create date
     posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
@@ -80,14 +86,15 @@ def post_draft_list(request):
 
 
 #Publishes the post or returns a 404 error if the pk is wrong
+@login_required
 def post_publish(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.publish()
     return redirect('post_detail', pk=pk)
 
 #Takes parameter pk, finds the post, deletes it, and then returns you to post_list
+@login_required
 def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
-#

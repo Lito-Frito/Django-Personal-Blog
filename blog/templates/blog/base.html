@@ -11,12 +11,25 @@
     </head>
     <body>
         <div class="page-header">
-    <!--If user is authenticated (superuser i.e logged in), then show the glyphicon plus icon-->
+          <!-- If user is logged in... -->
           {% if user.is_authenticated %}
-              <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-              <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+              <!--...Greet signed in users -->
+              <p class="top-menu">Hello {{ user.username }}!<br><br></p>
+
+          <!--...Else, show Mr Robot salute -->
+          {% else %}
+              <p class="top-menu">Hello friend 🤖<br><br></p>
           {% endif %}
+
             <h1><a href="/">Lito's Blog</a></h1>
+            <!--If user is logged in, then show the glyphicon logout, plus, and edit (pencil) icon...-->
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="top-menu"><i class="glyphicon glyphicon-log-out"></i></a>
+                <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+            {% else %}
+                <a href="{% url 'login' %}" class="top-menu"><i class="glyphicon glyphicon-log-in"></i></a>
+            {% endif %}
             <h4>"People. Purpose. Pupusas"</h4>
         </div>
         <div class="content container">

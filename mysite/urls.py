@@ -17,7 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.contrib.auth import views
+
 urlpatterns = [
+    #Show Django's built-in admin site
     path('admin/', admin.site.urls),
+    #Show Django's built-in login site
+    path('accounts/login/', views.LoginView.as_view(), name='login'),
+    #Show Django's built-in logout site
+    path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
+    #This is the 'homepage'. nothing after the first forward slash (pythonanywhere.com/_) takes you to blog.urls
     path('', include('blog.urls')),
 ]
