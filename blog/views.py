@@ -4,14 +4,14 @@ from django.shortcuts import render
 #This is needed for Class Post, which uses dates
 from django.utils import timezone
 
-#Import the Post class from models.py (in the current directory)
-from .models import Post
+#Import the Post class from models.py (in the current directory) and Comment class
+from .models import Post, Comment
 
 #This is so that a 404 error comes up if I type in /post/9/ but there's no ninth post
 from django.shortcuts import render, get_object_or_404
 
-#imports PostForm (which has .ModelForm)
-from .forms import PostForm
+#imports PostForm (which has .ModelForm) and CommentForm
+from .forms import PostForm, CommentForm
 
 #decorator used to see if someone is logged in; @login_required will make pages only accessible by logged in users
 from django.contrib.auth.decorators import login_required
@@ -98,3 +98,32 @@ def post_remove(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return redirect('post_list')
+
+#Takes parameter pk. If user is looking at post, show comment form. If form is valid (has data), save comment when clicking save and update page
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
+
+#Takes parameter pk, and lets superuser approve of comment, then refresh post_detail page
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('post_detail', pk=comment.post.pk)
+
+
+#Takes parameter pk, and lets superuser delete comment, then refresh post_detail page
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('post_detail', pk=comment.post.pk)

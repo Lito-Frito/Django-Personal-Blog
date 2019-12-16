@@ -21,4 +21,30 @@
             </div>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
+    <hr>
+    <!-- creates a button to let users add a comment -->
+    <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a><br>
+    <!-- Using a for loop, shows all the comments under a post -->
+    {% for comment in post.comments.all %}
+        <!-- Show the approved comments to authorized and regular users -->
+        {% if user.is_authenticated or comment.approved_comment %}
+        <div class="comment">
+            <strong>{{ comment.author }}</strong>
+            <div class="date">
+                {{ comment.created_date }}
+            </div>
+            <!-- But if you're authorized and the comment is or isn't approved, show a delete button -->
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+            {% endif %}
+            <!-- And if you're authorized and the comment is not approved, then also show the Approve button -->
+            {% if not comment.approved_comment %}
+                <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
+            {% endif %}
+            <p>{{ comment.text|linebreaks }}</p>
+        </div>
+        {% endif %}
+    {% empty %}
+        <p>No comments here yet :(</p>
+    {% endfor %}
 {% endblock %}

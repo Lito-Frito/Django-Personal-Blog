@@ -18,3 +18,24 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    #Returns only comments that are approved
+    def approved_comments(self):
+        return self.comments.filter(approved_comment=True)
+
+
+#Creates an object Comment. Takes a post, author, texxt, date, and comment-approval
+class Comment(models.Model):
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    #Approves and saves comment
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text

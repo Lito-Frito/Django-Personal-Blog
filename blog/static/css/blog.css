@@ -92,8 +92,13 @@ i {
     margin-left: 8px;
 }
 
-/*This will be for hyperlinks within the posts */
+.comment {
+    margin: 20px 0px 30px 20px;
+}
+
+/*This will be for hyperlinks within the posts
 .project_link {
   font-family: 'Fugaz One', cursive;
   font-size: 20px;
 }
+*/

@@ -22,4 +22,11 @@ urlpatterns = [
     path('post/<pk>/publish/', views.post_publish, name='post_publish'),
     #Path to remove posts
     path('post/<pk>/remove/', views.post_remove, name='post_remove'),
+    #Path to add a comment while looking at a blog post
+    path('post/<int:pk>/comment/', views.add_comment_to_post, name='add_comment_to_post'),
+    #Path to approve of comments
+    path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
+    #Path to remove comments
+    path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
+
 ]
