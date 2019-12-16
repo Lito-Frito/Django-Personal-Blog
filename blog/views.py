@@ -27,6 +27,8 @@ def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
+
+
 #POST/.POST means you posted data, not a blog post
 def post_new(request):
     #This means, "if you have already submited (or POSTed) data, save the content and call post_detail to create a new blog post"
@@ -41,7 +43,6 @@ def post_new(request):
             post = form.save(commit=False)
             #The next lines just add the data typically associated with a blog post
             post.author = request.user
-            post.published_date = timezone.now()
             #Preserve changes to post from added data; save that bad boy!
             post.save()
             #Redirects to post_detail while also generating a new pk for the URL
@@ -51,6 +52,9 @@ def post_new(request):
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
 
+
+
+#Let's  user edit posts, only if authenticated and valid data is passed through in the text form
 def post_edit(request, pk):
     #if page doesn't exist, return 404; take parameters Post and pk
     post = get_object_or_404(Post, pk=pk)
@@ -59,9 +63,30 @@ def post_edit(request, pk):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
-            post.published_date = timezone.now()
             post.save()
             return redirect('post_detail', pk=post.pk)
     else:
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
+
+
+
+#view to display only draft posts
+def post_draft_list(request):
+    #using a QuerySet, filters for posts without a publish date (i.e drafts) and orders them by create date
+    posts = Post.objects.filter(published_date__isnull=True).order_by('created_date')
+    return render(request, 'blog/post_draft_list.html', {'posts': posts})
+
+
+
+#Publishes the post or returns a 404 error if the pk is wrong
+def post_publish(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
+
+#Takes parameter pk, finds the post, deletes it, and then returns you to post_list
+def post_remove(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('post_list')
