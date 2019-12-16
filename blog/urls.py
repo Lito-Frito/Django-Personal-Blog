@@ -28,5 +28,4 @@ urlpatterns = [
     path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     #Path to remove comments
     path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
-
 ]
