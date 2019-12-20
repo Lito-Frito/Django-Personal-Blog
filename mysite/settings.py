@@ -25,7 +25,7 @@ SECRET_KEY = 'b#_4bv57xs#t8o63)n05rne=8gcri!7k&#_b!9x-ic#nm*%0qe'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '.netlify.com', '.crc8109']
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com', '.netlify.com', '.crc8109.com']
 
 
 # Application definition
