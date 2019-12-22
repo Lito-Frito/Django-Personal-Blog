@@ -16,7 +16,7 @@
             <div class="date">
                 {{ post.published_date }}
             </div>
-            <p>{{ post.text|linebreaksbr|truncatechars:400 }}</p>
+            <p>{{ post.text | safe | linebreaksbr | truncatechars:400 }}</p>
             <!-- Shows number of approved comments per blog post to users on post_list page using the the Post class-->
             <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
         </div>

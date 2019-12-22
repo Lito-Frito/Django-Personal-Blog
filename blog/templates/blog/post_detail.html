@@ -19,8 +19,10 @@
             <div class="date">
                 {{ post.published_date }}
             </div>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p>{{ post.text | safe | linebreaksbr }}</p>
     </div>
+
+    <!-- Comments Section -->
     <hr>
     <!-- creates a button to let users add a comment -->
     <a class="btn btn-default" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a><br>
