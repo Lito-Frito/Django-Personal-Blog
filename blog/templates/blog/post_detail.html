@@ -4,7 +4,7 @@
     <div class="post">
       <!-- If you're an authorized user... -->
         {% if user.is_authenticated %}
-            <!--... and if there's a publish date, show an edit button -->
+            <!--... and if there's a publish date (i.e not a draft), show an edit button -->
             {% if post.published_date %}
                 <a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
                 <a class="btn btn-default" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
