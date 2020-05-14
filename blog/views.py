@@ -20,7 +20,7 @@ from django.contrib.auth.decorators import login_required
 #See blog/template/blog/post_detail.html to see the file that's being rendered
 def post_list(request):
     #Uses QuerySets to sort blog posts by date (oldest first)
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
     #go to blog/post_list file and get the variable posts (as defined in the line above)
     return render(request, 'blog/post_list.html', {'posts': posts})
